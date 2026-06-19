@@ -11,8 +11,6 @@ import (
 	"os"
 	"time"
 	"unsafe"
-
-	"github.com/badhex/go-steamworks"
 )
 
 const appID = 480 // Replace with your own App ID.
