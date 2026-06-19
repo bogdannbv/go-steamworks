@@ -29,7 +29,13 @@ func loadLib() (uintptr, error) {
 		return lib, nil
 	}
 
-	lib, err := purego.Dlopen(libName, purego.RTLD_LAZY|purego.RTLD_LOCAL)
+	cwd, err := os.Getwd()
+	if err != nil {
+		return 0, fmt.Errorf("steamworks: failed to get current working directory: %w", err)
+	}
+
+	path := filepath.Join(cwd, libName)
+	lib, err := purego.Dlopen(path, purego.RTLD_LAZY|purego.RTLD_LOCAL)
 	if err != nil {
 		return 0, fmt.Errorf("steamworks: dlopen failed for %s: %w", libName, err)
 	}
